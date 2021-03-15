@@ -1,10 +1,16 @@
 {
   "compilerOptions": {
+    "typeRoots": [
+        "./node_modules/@types",
+        "./src/types"
+      ],
       "module": "commonjs",
       "esModuleInterop": true,
       "target": "es6",
       "noImplicitAny": true,
       "moduleResolution": "node",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
       "sourceMap": true,
       "outDir": "dist",
       "baseUrl": ".",
@@ -16,5 +22,9 @@
   },
   "include": [
       "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "tests"
   ]
 }
