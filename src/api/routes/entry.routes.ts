@@ -2,6 +2,7 @@ import { Router, Request, Response, NextFunction } from 'express';
 import EntryService from '../../services/entry.service';
 import { Container } from 'typedi';
 import { IEntry } from '../../interfaces/entry.interface';
+import authMiddleWare from '../../middleware/token.middelware';
 
 const route = Router();
 
@@ -10,6 +11,7 @@ export default (app: Router) => {
 
   route.get(
     '/',
+    authMiddleWare,
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const entryServiceInstance = Container.get(EntryService);
