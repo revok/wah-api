@@ -11,8 +11,6 @@ export default (app: Router) => {
   route.get(
     '/',
     async (req: Request, res: Response, next: NextFunction) => {
-      console.log('GET ENTRIES');
-
       try {
         const entryServiceInstance = Container.get(EntryService);
         const entries = await entryServiceInstance.getEntries();

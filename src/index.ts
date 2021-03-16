@@ -4,6 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import routes from './api';
 import { Container } from 'typedi';
+import cors from 'cors';
 
 import entryModel from './models/entry.model'
 
@@ -37,6 +38,9 @@ Container.set('entryModel', entryModel);
 
 // Create a new express app instance
 const app: express.Application = express();
+
+app.use(cors());
+app.use(express.json());
 
 app.use('/', routes());
 
