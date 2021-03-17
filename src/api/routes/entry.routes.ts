@@ -9,13 +9,35 @@ const route = Router();
 export default (app: Router) => {
   app.use('/entry', route);
 
+  /**
+   * Retrieve entry list
+   */
   route.get(
     '/',
     authMiddleWare,
     async (req: Request, res: Response, next: NextFunction) => {
       try {
+        const granularity = req.query.granularity;
         const entryServiceInstance = Container.get(EntryService);
-        const entries = await entryServiceInstance.getEntries();
+        const entries = await entryServiceInstance.getEntries(granularity ? granularity.toString() : undefined);
+        return res.status(201).json(entries);
+      } catch (e) {
+        return next(e);
+      }
+    },
+  );
+
+  /**
+   * Retrieve entries grouped by value.
+   */
+  route.get(
+    '/grouped',
+    authMiddleWare,
+    async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        const granularity = req.query.granularity;
+        const entryServiceInstance = Container.get(EntryService);
+        const entries = await entryServiceInstance.getGroupedData(granularity ? granularity.toString() : undefined);
         return res.status(201).json(entries);
       } catch (e) {
         return next(e);
