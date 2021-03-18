@@ -1,12 +1,9 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { IUser } from '../../interfaces/user.interface';
+import jwt from 'jsonwebtoken';
 import { Container } from 'typedi';
-import EntryService from '../../services/entry.service';
+import { IUser } from '../../interfaces/user.interface';
+import { default as authMiddleWare, default as withAuth } from '../../middleware/token.middelware';
 import UserService from '../../services/user.service';
-import jwt  from 'jsonwebtoken';
-import authMiddleWare from '../../middleware/token.middelware';
-import { Console } from 'node:console';
-import withAuth from '../../middleware/token.middelware';
 
 const route = Router();
 
