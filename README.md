@@ -21,7 +21,8 @@ First, consider using the [infra project](https://github.com/revok/wah-infra) as
 If you're sure you want to set up locally:
 - install [mongodb](https://www.mongodb.com/) 
 - Copy the env.dist file to a .env file.
-- Then run `npm run dev`.
+- Run `npm install` to install dependencies.
+- Run `npm run dev` to start serving the API.
 - Create a login (see below)
 
   
