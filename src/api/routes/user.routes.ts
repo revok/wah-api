@@ -44,7 +44,6 @@ export default (app: Router) => {
     },
   );
 
-
   route.get('/validateToken', withAuth, function(req, res) {
     res.sendStatus(200);
   });
@@ -57,8 +56,6 @@ export default (app: Router) => {
 
     const userServiceInstance = Container.get(UserService);
     const isAuthenticated = await userServiceInstance.authenticate(req.body as IUser);
-
-    console.log('AUTHENTICATED', isAuthenticated);
 
     if (!isAuthenticated) {
       res.status(401)

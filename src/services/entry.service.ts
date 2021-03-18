@@ -40,40 +40,40 @@ export default class EntryService {
    */
   public async getGroupedData(granularity ?: string): Promise<IEntry[]> {
     return this.getEntries(granularity)
-    .then((entries) => {
-
-      // Group by value.
-      if (entries) {
-        const result: IEntry[] = [];
-
-        const groupedByValue = new Map<number, IEntry[]>();
-
-        for (const e of entries) {
-          if (!groupedByValue.has(e.value)) {
-            groupedByValue.set(e.value, []);
+      .then((entries) => {
+  
+        // Group by value.
+        if (entries) {
+          const result: IEntry[] = [];
+  
+          const groupedByValue = new Map<number, IEntry[]>();
+  
+          for (const e of entries) {
+            if (!groupedByValue.has(e.value)) {
+              groupedByValue.set(e.value, []);
+            }
+  
+            const parent = groupedByValue.get(e.value);
+  
+            // just in case
+            if (Array.isArray(parent)) {
+              parent.push(e);
+            }
           }
-
-          const parent = groupedByValue.get(e.value);
-
-          // just in case
-          if (Array.isArray(parent)) {
-            parent.push(e);
+  
+  
+          for (const [key, group] of groupedByValue.entries()) {
+            result.push({
+              name: String(key),
+              value: group.length
+            })
           }
+  
+          return result;
         }
-
-
-        for (const [key, group] of groupedByValue.entries()) {
-          result.push({
-            name: String(key),
-            value: group.length
-          })
-        }
-
-        return result;
-      }
-
-      return [];
-    })
+  
+        return [];
+      })
   }
 
   /**
